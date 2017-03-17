@@ -1,0 +1,26 @@
+HW5: Building AES.
+Due: 11:59pm, Saturday, March 11
+
+1. AES_Simulation.java (done!)
+   - Main simulation engine
+2. AES.java
+   - A high level class that handles encryption and decryption
+   - You need to complete the roundFunctionEncrypt and rouncFunctionDecrypt methods
+3. KeySchedule.java (done!)
+   - Generates an initial key and 10 round keys
+4. Util.java
+   - Contains several conversion funciton.
+   - You need to complete the mulyiply method
+5. KeyAdditionLayer.java
+   - You need to complete the keyAddition method
+6. SBox.java, InvSBox.java
+   - Contains S-box and inverse S-box.
+   - You need to complete the byteSubstitute methods in both classes
+7. DiffusionLayer.java, InvDiffusionLayer.java
+   - Contains shiftRow and mixColumn sublayers.
+   - You need to complete the mixColumn sublayers in both classes
+8. Data files
+   plaintext.txt - a block of 16 bytes
+   key0.txt, key1.txt - the main key of 16 bytes
+   You may want to test your program with other plaintext and keys.
+

@@ -29,15 +29,15 @@ public class AES {
      */
     public static int[] roundFunctionEncrypt(int round, int[] datapath, int[] subkey){
         //1. ByteSubstitute layer
-
+        datapath = SBox.substitute(datapath);
         //2. ShiftRow layer
-
+        int [][] shift_datapath = DiffusionLayer.shiftRow(datapath);
         //3. MixColumn layer
-
+        int [] mix_datapath = DiffusionLayer.mixColumn(shift_datapath);
         //4. KeyAddition layer
+        int [] addition_layer = KeyAdditionLayer.keyAddition(mix_datapath,subkey);
 
-
-        return datapath;
+        return addition_layer;
     }
     /**
      AES Decryption

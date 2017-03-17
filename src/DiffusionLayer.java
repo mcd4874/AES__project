@@ -20,6 +20,14 @@ public class DiffusionLayer {
                 {d[15],d[3],d[7],d[11]}};
         return B;
     }
+
+    public static int calculate_C(int col, int row ,int[][] B) {
+        int result = 0;
+        for (int index = 0; index<4; index++)
+            result = result ^ Util.multiply(M[row][index],B[index][col]);
+        return result;
+    }
+
     /**
      Complete the MixColumn layer
      You will need to use the Util.multiply function
@@ -27,6 +35,12 @@ public class DiffusionLayer {
      */
     public static int[] mixColumn(int[][] B){
         int[][] C = new int[4][4];
+
+        for ( int col = 0; col< 4; col++) {
+            for (int row = 0; row<4; row++) {
+                C[row][col] = calculate_C(col, row, B);
+            }
+        }
         // Put your code here
         // ...
 

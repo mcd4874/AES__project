@@ -1,6 +1,8 @@
 /**
  * Created by minhduong on 3/15/17.
  */
+
+
 public class Util {
     /**
      Converts a string of 16-characters to 16-bytes
@@ -59,10 +61,10 @@ public class Util {
      */
     public static int[] wordTo4Bytes(long W){
         int[] V = new int[4];
-        V[0] = (int)((W & 0xF000) >> 24);
-        V[1] = (int)((W & 0x0F00) >> 16);
-        V[2] = (int)((W & 0x00F0) >> 8);
-        V[3] = (int)(W & 0x000F);
+        V[0] = (int)((W & 0xFF000000) >> 24);
+        V[1] = (int)((W & 0x00FF0000) >> 16);
+        V[2] = (int)((W & 0x0000FF00) >> 8);
+        V[3] = (int)(W & 0x000000FF);
         return V;
     }
     /**
@@ -73,10 +75,10 @@ public class Util {
         int[] V = new int[16];
         long[] W = {W0, W1, W2, W3};
         for(int i=0; i<4; i++){
-            V[4*i+0] = (int)((W[i] & 0xF000) >> 24);
-            V[4*i+1] = (int)((W[i] & 0x0F00) >> 16);
-            V[4*i+2] = (int)((W[i] & 0x00F0) >> 8);
-            V[4*i+3] = (int)(W[i] & 0x000F);
+            V[4*i+0] = (int)((W[i] & 0xFF000000) >> 24);
+            V[4*i+1] = (int)((W[i] & 0x00FF0000) >> 16);
+            V[4*i+2] = (int)((W[i] & 0x0000FF00) >> 8);
+            V[4*i+3] = (int)(W[i] & 0x000000FF);
         }
         return V;
     }
