@@ -30,10 +30,16 @@ public class AES {
     public static int[] roundFunctionEncrypt(int round, int[] datapath, int[] subkey){
         //1. ByteSubstitute layer
         datapath = SBox.substitute(datapath);
-        //2. ShiftRow layer
-        int [][] shift_datapath = DiffusionLayer.shiftRow(datapath);
-        //3. MixColumn layer
-        int [] mix_datapath = DiffusionLayer.mixColumn(shift_datapath);
+            //2. ShiftRow layer
+        int[][] shift_datapath = DiffusionLayer.shiftRow(datapath);
+        int [] mix_datapath = {};
+        if (round != ROUND_NUMBERS) {
+            //3. MixColumn layer
+            mix_datapath = DiffusionLayer.mixColumn(shift_datapath);
+            //last round there is no mix column layer calculation
+        } else {
+            mix_datapath = Util.matrixToVector(shift_datapath);
+        }
         //4. KeyAddition layer
         int [] addition_layer = KeyAdditionLayer.keyAddition(mix_datapath,subkey);
 
@@ -64,18 +70,22 @@ public class AES {
 
     public static int[] roundFunctionDecrypt(int round, int[] datapath, int[] subkey){
         //1. KeyAddition layer
-
+        int [] addition_layer = KeyAdditionLayer.keyAddition(datapath, subkey);
 
         //2. MixColumn layer
-
-
+        int [][] mixColum = {};
+        if (round == ROUND_NUMBERS) {
+            mixColum = Util.vectorToMatrix(addition_layer);
+        } else {
+            mixColum = invDiffusionLayer.mixColumn(addition_layer);
+        }
         //3. Inverse ShiftRow layer
-
+        int [] shiftRow = invDiffusionLayer.shiftRow(mixColum);
 
         //4. Inverse ByteSubstitute layer
+        int [] new_datapath = invSBox.substitute(shiftRow);
 
 
-
-        return datapath;
+        return new_datapath;
     }
 }

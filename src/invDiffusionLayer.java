@@ -20,6 +20,14 @@ public class invDiffusionLayer {
                 B[0][3], B[1][2], B[2][1], B[3][0]};
         return d;
     }
+
+    public static int calculate_B(int col, int row ,int[][] C) {
+        int result = 0;
+        for (int index = 0; index<4; index++)
+            result = result ^ Util.multiply(InvM[row][index],C[index][col]);
+        return result;
+    }
+
     /**
      Complete the inverse mixColumn layer
      You will need to use the Util.multiply function
@@ -30,7 +38,11 @@ public class invDiffusionLayer {
         int[][] C = Util.vectorToMatrix(datapath);
         int[][] B = new int[4][4];
         //Put your code here
-        //...
+        for ( int col = 0; col< 4; col++) {
+            for (int row = 0; row<4; row++) {
+                B[row][col] = calculate_B(col, row, C);
+            }
+        }
         return B;
     }
 }

@@ -33,6 +33,9 @@ public class invSBox {
     public static int byteSubstitute(int inputByte){
         int row = 0, col = 0;
         //Put your code here
+        col = inputByte & 0x0000000F;
+        // get the bits from 24 to 27
+        row = (inputByte & 0x000000F0)>> 1 ;
         return InvS[row][col];
     }
     /**

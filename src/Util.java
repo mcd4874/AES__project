@@ -102,10 +102,41 @@ public class Util {
         else if(x == 0x03){
             result = multiply(0x02, y) ^ y;
         }
-        else if(x == 0x09){}
-        else if(x == 0x0B){}
-        else if(x == 0x0D){}
-        else if(x == 0x0E){}
+
+        else if (x == 0x04) {
+            result = y<<2;
+            if ((result & 512) == 512) {
+                result = (result - 512) ^ Integer.parseInt("110110", 2);
+            }
+            if ((result & 256) == 256){ //Reduction mod P(x) = x^8 + x^4 + x^3 + x + 1
+                result = (result - 256) ^ Integer.parseInt("11011", 2);
+            }
+        }
+        else if (x== 0x08){
+            result = y<<3;
+            if ((result & 1024) == 1024) {
+                result = (result - 1024) ^ Integer.parseInt("1101100", 2);
+            }
+            if ((result & 512) == 512) {
+                result = (result - 512) ^ Integer.parseInt("110110", 2);
+            }
+            if ((result & 256) == 256){ //Reduction mod P(x) = x^8 + x^4 + x^3 + x + 1
+                result = (result - 256) ^ Integer.parseInt("11011", 2);
+            }
+
+        }
+        else if(x == 0x09){
+            result = multiply(0x08, y) ^ y;
+        }
+        else if(x == 0x0B){
+            result = multiply(0x08,y) ^ multiply(0x02,y) ^y;
+        }
+        else if(x == 0x0D){
+            result = multiply(0x08,y) ^ multiply(0x04,y) ^ y;
+        }
+        else if(x == 0x0E){
+            result =  multiply(0x08,y) ^ multiply(0x04,y) ^ multiply(0x02,y);
+        }
 
         return result;
     }
