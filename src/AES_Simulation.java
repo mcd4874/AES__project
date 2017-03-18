@@ -29,22 +29,22 @@ public class AES_Simulation {
 
         //Your ciphertext will be tested
         //Uncomment the following test code later
-      /*for(int i : y){
+      for(int i : y){
          System.out.print(Integer.toHexString(i) + " ");
       }
       System.out.println();
-      */
+
 
         int[] decrypted = AES.decrypt(y, Util.strToBytes(key));
 
 
         //Decrypted bytes must match plaintext x
         //Uncomment the following test code later
-      /*for(int i=0; i<16; i++){
+      for(int i=0; i<16; i++){
          System.out.print((x[i] == decrypted[i]) + " ");//This will be tested
       }
       System.out.println();
-      */
+
 
         String recoveredText = Util.bytesToStr(decrypted);
         System.out.println("recoverted Text: ");

@@ -32,11 +32,9 @@ public class SBox {
     public static int byteSubstitute(int inputByte){
         int row = 0, col = 0;
         //get bit 28 to 31
-        col = inputByte & 0x0000000F;
+        col = inputByte & 0x0F;
         // get the bits from 24 to 27
-        row = (inputByte & 0x000000F0)>> 1 ;
-        //Put your code here
-
+        row = (inputByte & 0xF0)>>4 ;
         return S[row][col];
     }
     /**
